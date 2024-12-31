@@ -1,16 +1,20 @@
 # Use a public base image with Python
 FROM python:3.9-slim
 
-# Install system dependencies for the ArcGIS Python API
+# Install system-level dependencies, including krb5-config
 RUN apt-get update && apt-get install -y \
+    krb5-user \
+    libkrb5-dev \
     gdal-bin \
     libgdal-dev \
     libcurl4-openssl-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install ArcGIS Python API and other dependencies
+# Copy the requirements file
 COPY requirements.txt /tmp/
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Set up a working directory
