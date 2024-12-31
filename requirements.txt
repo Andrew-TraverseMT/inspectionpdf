@@ -1,2 +1,4 @@
-arcgis
-fpdf
+fpdf==1.7.2
+ipython
+urllib3
+arcgis==1.9.3
